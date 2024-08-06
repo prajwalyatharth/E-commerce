@@ -1,0 +1,14 @@
+.footer-page{
+    min-height: 100px ;
+    background-color: rgb(125, 124, 124);
+    display: flex;
+    justify-content: center;
+}
+
+.footer-content{
+ 
+    display: flex;flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
