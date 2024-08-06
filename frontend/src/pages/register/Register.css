@@ -1,0 +1,34 @@
+.register-page{
+    min-height: 91vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(203, 207, 207);
+}
+
+.register-card{
+    gap: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    height: 400px;
+    width: 280px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+}
+
+.register-card .input{
+    width: 250px;
+    height: 25px;
+    padding: 1px;
+}
+
+.register-card .input-heading{
+
+    margin-bottom: 5px;
+    width: 250px;
+    height: 20px;
+}
