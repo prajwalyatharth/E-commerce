@@ -1,0 +1,9 @@
+.page-not-found{
+    min-height: 91vh;
+    background-color:white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  
+}

@@ -1,0 +1,28 @@
+.footer-page{
+    min-height: 150px ;
+    background-color: rgb(77, 75, 75);
+  color: black
+  
+}
+
+.footer-content{
+    display: flex;flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 0.5px solid black;
+    text-decoration: none;
+
+}
+
+.footer-link a {
+    text-decoration: none;
+    color: black
+    
+}
+
+
+.footer-link a:hover {
+    text-decoration: none;
+    color: black;
+    border-bottom: 1px solid black;
+}
