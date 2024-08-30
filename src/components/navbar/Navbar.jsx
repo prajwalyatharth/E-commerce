@@ -21,11 +21,11 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="navbar navbar-expand-lg">
-            <div className="container">
+        <nav className="navbar navbar-expand-lg ">
+            <div className="container ">
                 <div className='navbar-logo-name'>
                     <img src={logo1} alt="JustForYou logo" style={{ height: '30px' }} />
-                    <h4>JustForYou</h4>
+                    <h4>ShopForYou</h4>
                 </div>
 
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,14 +50,14 @@ const Navbar = () => {
 
 
                         <li className="nav-item dropdown">
-                            <div className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <NavLink className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Products
-                            </div>
+                            </NavLink>
                             <ul className="dropdown-menu">
                                 <li><Link className="dropdown-item" to="/men">Men</Link></li>
                                 <li><Link className="dropdown-item" to="/women">Women</Link></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><Link className="dropdown-item" to="/compare">Compare All</Link></li>
+                                <li><Link className="dropdown-item" to="/women">Kids</Link></li>
+
                             </ul>
                         </li>
 
@@ -71,11 +71,23 @@ const Navbar = () => {
                                 </li>
                             </>
                         ) : (
-                            <li className="nav-item">
+                            <>
+                                <li className="nav-item">
+                                    <li className="nav-item dropdown">
+                                        <NavLink className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            {auth?.user?.name}
+                                        </NavLink>
+                                        <ul className="dropdown-menu">
+                                            <li><Link className="dropdown-item" to={`/dashboard/${auth?.user?.role === 1 ? 'admin' : "user"}`}>Dashboard</Link></li>
 
-                                <button onClick={handleLogout} className="bg-button">Logout</button>
+                                            <button onClick={handleLogout} className="bg-button">Logout</button>
 
-                            </li>
+                                        </ul>
+                                    </li>
+
+
+                                </li>
+                            </>
                         )}
 
                         <li className="nav-item">

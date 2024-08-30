@@ -12,6 +12,7 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
+    const [answer, setAnswer] = useState("");
 
     const Navigate = useNavigate();
 
@@ -20,7 +21,7 @@ const Register = () => {
         e.preventDefault()
 
         try {
-            const res = await axios.post(`http://localhost:8080/api/v1/auth/register`, { name, email, password, phone, address })
+            const res = await axios.post(`http://localhost:8080/api/v1/auth/register`, { name, email, password, phone, address, answer })
             if (res.data.success) {
                 toast.success(res.data.message)
                 setTimeout(() => {
@@ -63,8 +64,12 @@ const Register = () => {
                     <input className='input' value={phone} onChange={(e) => setPhone(e.target.value)} type="text" placeholder='Enter your phone number' required />
                 </div>
                 <div className='form-group'>
-                    <label className='input-label'>address</label>
+                    <label className='input-label'>Address</label>
                     <input className='input' value={address} onChange={(e) => setAddress(e.target.value)} type="text" placeholder='Enter your phone address' required />
+                </div>
+                <div className='form-group'>
+                    <label className='input-label'>Answer</label>
+                    <input className='input' value={answer} onChange={(e) => setAnswer(e.target.value)} type="text" placeholder='what is ur favourite sports?' required />
                 </div>
 
                 <button className='register-button'>Register</button>

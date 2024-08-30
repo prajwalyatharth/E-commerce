@@ -11,6 +11,14 @@ import PageNotFound from './pages/notFound/PageNotFound';
 import { AuthProvider } from './context/auth';
 import Dashboard from './pages/user/Dashboard';
 import PrivetRoute from './components/routes/Privet';
+import Forgotpassword from './pages/forgotpassword/Forgotpassword';
+import AdminRoute from './components/routes/AdminRoute';
+import AdminDashboard from './pages/user/AdminDashboard';
+import CreateProduct from './components/admin/CreateProduct';
+import CreateCategory from './components/admin/CreateCategory';
+import UsersPage from './components/admin/UsersPage';
+import Profile from './pages/user/Profile';
+import Orders from './pages/user/Orders';
 
 
 function App() {
@@ -24,11 +32,21 @@ function App() {
           <Route exact path='/' element={<Home />} />
 
           <Route exact path='/dashboard' element={<PrivetRoute />}>
-            <Route exact path='' element={<Dashboard />} />
+            <Route exact path='user' element={<Dashboard />} />
+            <Route exact path='/dashboard/user/profile' element={<Profile />} />
+            <Route exact path='/dashboard/user/orders' element={<Orders />} />
           </Route>
+          <Route exact path='/dashboard' element={<AdminRoute />}>
+            <Route exact path='admin' element={<AdminDashboard />} />
+            <Route exact path='/dashboard/admin/create-product' element={<CreateProduct />} />
+            <Route exact path='/dashboard/admin/create-category' element={<CreateCategory />} />
+            <Route exact path='/dashboard/admin/user' element={<UsersPage />} />
+          </Route>
+
 
           <Route exact path='/register' element={<Register />} />
           <Route exact path='/login' element={<Login />} />
+          <Route exact path='/forgot-password' element={<Forgotpassword />} />
           <Route exact path='*' element={<PageNotFound />} />
         </Routes>
 

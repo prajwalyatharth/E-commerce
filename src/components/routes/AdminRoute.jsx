@@ -1,18 +1,17 @@
-
 import axios from 'axios';
 import { useAuth } from '../../context/auth';
 import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Spinner from './Spinner';
 
-const Privet = () => {
+const AdminRoute = () => {
 
     const [ok, setok] = useState(false)
-    const [auth] = useAuth()
+    const [auth, setAuth] = useAuth()
 
     useEffect(() => {
         const authCheck = async () => {
-            const res = await axios.get('http://localhost:8080/api/v1/auth/user',
+            const res = await axios.get('http://localhost:8080/api/v1/auth/admin',
                 {
                     headers: {
                         "Authorization": `Bearer ${auth?.token}`
@@ -31,7 +30,8 @@ const Privet = () => {
 
     }, [auth?.token]);
 
-    return ok ? <Outlet /> : <Spinner />
+    return ok ? <Outlet /> : <Spinner path='' />
 }
 
-export default Privet
+
+export default AdminRoute
