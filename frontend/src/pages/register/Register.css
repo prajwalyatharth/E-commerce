@@ -1,34 +1,108 @@
-.register-page{
+.register-page {
     min-height: 91vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(203, 207, 207);
+    background-color: #F4F4F4;
+    padding: 20px;
 }
 
-.register-card{
-    gap: 15px;
-    padding: 20px;
+.register-card {
+    padding: 30px 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
-    height: 400px;
-    width: 280px;
-    background-color: whitesmoke;
-    border-radius: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
 }
 
-.register-card .input{
-    width: 250px;
-    height: 25px;
-    padding: 1px;
+.register-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
 }
 
-.register-card .input-heading{
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
 
+.input-label {
+    display: block;
+    font-size: 14px;
     margin-bottom: 5px;
-    width: 250px;
-    height: 20px;
+    text-align: left;
+    color: #666;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    background-color: #FAFAFA;
+    transition: border-color 0.3s;
+}
+
+.input:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+.register-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.register-button:hover {
+    background-color: #0056b3;
+}
+
+.login-link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.login-link a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 576px) {
+    .register-card {
+        padding: 20px;
+    }
+
+    .register-title {
+        font-size: 20px;
+    }
+
+    .register-button {
+        font-size: 14px;
+        padding: 10px;
+    }
 }

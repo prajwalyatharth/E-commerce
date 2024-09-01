@@ -2,13 +2,18 @@ import React, { useEffect, useState } from 'react';
 import './Home.css';
 import bg from '../../assets/bgimg.jpg';
 import Homefeature from './Homefeature';
+import { Helmet } from "react-helmet";
+import { useAuth } from '../../context/auth';
+
 
 const Home = () => {
+
   const messages = ['Style', 'Elegance', 'Comfort'];
   const colors = ['#FF0000', '#0000FF', '#008000', '#800080'];
 
   const [currentFont, setCurrentFont] = useState(0);
   const [currentColor, setCurrentColor] = useState(0);
+  const [auth, setAuth] = useAuth();
 
   useEffect(() => {
     const fontInterval = setInterval(() => {
@@ -16,7 +21,7 @@ const Home = () => {
     }, 3000);
 
     return () => clearInterval(fontInterval);
-  }, []);
+  }, [messages.length]);
 
   useEffect(() => {
     const colorInterval = setInterval(() => {
@@ -24,11 +29,17 @@ const Home = () => {
     }, 3000);
 
     return () => clearInterval(colorInterval);
-  }, []);
+  }, [colors.length]);
 
   return (
     <div className='home-page'>
-      <div className='home-content container'>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>JustForYOu - Home</title>
+      </Helmet>
+
+      <pre>{JSON.stringify(auth, null, 4)}</pre>
+      <div className='home-content'>
         <h1 style={{ fontSize: '50px' }}>JustForYou</h1>
         <p>– Where Superiority Meets {messages[currentFont]}</p>
 
@@ -37,7 +48,7 @@ const Home = () => {
         </div>
 
         <div>
-          <span style={{ fontSize: '40px',fontWeight: 'bold' , color: colors[currentColor] }}>60%</span>
+          <span style={{ fontSize: '40px', fontWeight: 'bold', color: colors[currentColor] }}>60%</span>
         </div>
         <br />
 
@@ -47,7 +58,7 @@ const Home = () => {
 
       </div>
       <img src={bg} alt='' style={{ height: 'auto', width: '100%', marginTop: '40px' }} />
-      <Homefeature/>
+      <Homefeature />
     </div>
   );
 };

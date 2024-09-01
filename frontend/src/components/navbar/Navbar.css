@@ -4,8 +4,6 @@
     align-items: center;
     height: 60px;
     background-color:white;
-
-    
 }
 
 .navbar-logo-name{
@@ -15,21 +13,12 @@
    
 }
 
-
-.navbar-btn{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 450px;
-}
-
 .normal-button{
-    width: 80px;
-    color: black;
+    width: 0px;
+    color: rgb(0, 0, 0);
     display: inline-block;
-    
+   
 }
-
 
 .bg-button{
     font-size: 15px;
@@ -40,6 +29,16 @@
     background-color: rgb(61, 138, 221);
     border-radius: 5px;
     color: aliceblue;
+    
 }
 
 
+.nav-link {
+    display: inline-block;
+    padding: 10px;
+}
+
+.nav-link.bold {
+    font-weight: 500; 
+    color: #000; 
+}
