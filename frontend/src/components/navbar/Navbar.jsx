@@ -44,7 +44,7 @@ const Navbar = () => {
                             <NavLink
                                 className={({ isActive }) => isActive ? "nav-link active bold" : "nav-link"}
                                 to="/about">
-                                About
+                                About us
                             </NavLink>
                         </li>
 

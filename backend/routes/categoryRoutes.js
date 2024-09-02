@@ -14,7 +14,6 @@ router.put('/update-category', requireSignin, isAdmin, updateCategoryController)
 //get 
 router.get('/get-category', categoryController);
 
-
 //get single
 router.get('/single-category/:slug', singleCategoryController);
 
