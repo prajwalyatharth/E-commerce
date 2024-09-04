@@ -118,11 +118,10 @@ const CreateCategory = () => {
         console.log("Delete function triggered with ID:", pId); // Log to confirm the function is called
         try {
             const { data } = await axios.delete(
-                `http://localhost:5000/api/v1/category/delete-category/${pId}`,
+                `http://localhost:8080/api/v1/category/delete-category/${pId}`,
                 {
                     headers: {
-                        authorization:
-                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmNlZDAzOTI0N2Y4NTA1NmE3ZDIwMWIiLCJpYXQiOjE3MjUyOTYwMTUsImV4cCI6MTcyNzg4ODAxNX0.MGeT6VvFupJCo9bclxKh2wb9Ctl5WT_4CsQOJOTXj-Q",
+                        Authorization: `Bearer ${token}`,
                     },
                 }
             );

@@ -19,7 +19,7 @@ router.get('/get-category', categoryController);
 router.get('/single-category/:slug', singleCategoryController);
 
 //delete
-router.delete('/delete-category/:id', isAdmin, requireSignin, deleteCategoryController);
+router.delete('/delete-category/:id', requireSignin, isAdmin, deleteCategoryController);
 
 
 

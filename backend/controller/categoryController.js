@@ -1,4 +1,4 @@
-import categorymodel from "../models/categorymodel.js";
+import categorymodel from '../models/categorymodel.js'
 import slugify from "slugify";
 
 // Create category controller
@@ -101,15 +101,15 @@ export const singleCategoryController = async (req, res) => {
 // Delete category controller
 export const deleteCategoryController = async (req, res) => {
     console.log("deleting");
-
     try {
         const { id } = req.params;
-        const category = await categoryModel.findByIdAndDelete(id);
+        const category = await categorymodel.findByIdAndDelete(id);
         res.status(200).send({
             success: true,
             message: "deleted category successfully ",
             category
         })
+        console.log("deleted")
     } catch (error) {
         console.log(error);
         return res.status(500).send({
