@@ -3,13 +3,14 @@ import { isAdmin, requireSignin } from '../middleware/authMiddleware.js';
 import { categoryController, createCategoryController, deleteCategoryController, singleCategoryController, updateCategoryController } from '../controller/categoryController.js';
 
 
+
 const router = express.Router()
 
 //router
 router.post('/create-category', requireSignin, isAdmin, createCategoryController);
 
 //update category
-router.put('/update-category', requireSignin, isAdmin, updateCategoryController);
+router.put('/update-category/:id', requireSignin, isAdmin, updateCategoryController);
 
 //get 
 router.get('/get-category', categoryController);
