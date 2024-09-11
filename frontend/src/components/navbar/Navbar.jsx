@@ -47,18 +47,12 @@ const Navbar = () => {
                                 About us
                             </NavLink>
                         </li>
-
-
-                        <li className="nav-item dropdown">
-                            <NavLink className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <li className="nav-item">
+                            <NavLink
+                                className={({ isActive }) => isActive ? "nav-link active bold" : "nav-link"}
+                                to="/all-products">
                                 Products
                             </NavLink>
-                            <ul className="dropdown-menu">
-                                <li><Link className="dropdown-item" to="/men">Men</Link></li>
-                                <li><Link className="dropdown-item" to="/women">Women</Link></li>
-                                <li><Link className="dropdown-item" to="/women">Kids</Link></li>
-
-                            </ul>
                         </li>
 
                         {!auth.user ? (

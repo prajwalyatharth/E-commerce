@@ -49,8 +49,8 @@ const CreateCategory = () => {
                 },
             });
 
-            if (data.success) {
-                setCategories(data.categories);
+            if (data?.success) {
+                setCategories(data?.categories);
             } else {
                 toast.error("Failed to load categories");
             }
@@ -115,7 +115,6 @@ const CreateCategory = () => {
     // };
 
     const handleDelete = async (pId) => {
-        console.log("Delete function triggered with ID:", pId); // Log to confirm the function is called
         try {
             const { data } = await axios.delete(
                 `http://localhost:8080/api/v1/category/delete-category/${pId}`,
@@ -125,7 +124,7 @@ const CreateCategory = () => {
                     },
                 }
             );
-            console.log("Delete Response:", data); // Log the response from the server
+
             if (data.success) {
                 toast.success("Category is deleted");
                 getAllCategory();
@@ -133,52 +132,52 @@ const CreateCategory = () => {
                 toast.error(data.message);
             }
         } catch (error) {
-            console.error("Error during delete:", error); // Log any errors
+
             toast.error("Something went wrong during deletion");
         }
     };
 
     return (
-        <div className='dashboard-page container-fluid m-5'>
+        <div className='dashboard-page container m-5'>
             <div className='row'>
                 <Toaster />
                 <div className='col-md-2'>
                     <AdminMenu />
                 </div>
                 <div className='col-md-10'>
-                    <h3>Manage Category</h3>
-                    <div className='card w-75 p-3'>
-                        <div>
-                            <CategoryForm handleSubmit={handleSubmit} value={name} setValue={setName} />
-                        </div>
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {categories.length > 0 ? (
-                                    categories?.map((c) => (
-                                        <tr key={c._id}> {/* Key prop should be unique */}
-                                            <td>{c.name}</td>
-                                            <td>
-                                                <button className='btn btn-primary ms-2' onClick={() => { setVisible(true); setUpdatedName(c.name); setSelected(c); }}>
-                                                    Edit
-                                                </button>
-                                                <button className='btn btn-danger ms-2' onClick={() => handleDelete(c._id)}>Delete</button>
-                                            </td>
-                                        </tr>
-                                    ))
-                                ) : (
-                                    <tr>
-                                        <td colSpan="2">No categories found.</td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
+                    <h2 className='text-center'>Manage Category</h2>
+
+                    <div>
+                        <CategoryForm handleSubmit={handleSubmit} value={name} setValue={setName} />
                     </div>
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {categories.length > 0 ? (
+                                categories?.map((c) => (
+                                    <tr key={c._id}> {/* Key prop should be unique */}
+                                        <td>{c.name}</td>
+                                        <td>
+                                            <button className='btn btn-primary ms-2' onClick={() => { setVisible(true); setUpdatedName(c.name); setSelected(c); }}>
+                                                Edit
+                                            </button>
+                                            <button className='btn btn-danger ms-2' onClick={() => handleDelete(c._id)}>Delete</button>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="2">No categories found.</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+
 
                     <Modal onCancel={() => { setVisible(false) }} footer={null} open={visible}>
                         <CategoryForm value={updatedName} setValue={setUpdatedName} handleSubmit={handleUpdate} />

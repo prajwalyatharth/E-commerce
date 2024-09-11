@@ -4,6 +4,7 @@ import bg from '../../assets/bgimg.jpg';
 import Homefeature from './Homefeature';
 import { Helmet } from "react-helmet";
 import { useAuth } from '../../context/auth';
+import { Link } from 'react-router-dom';
 
 
 const Home = () => {
@@ -38,7 +39,7 @@ const Home = () => {
         <title>JustForYOu - Home</title>
       </Helmet>
 
-      <pre>{JSON.stringify(auth, null, 4)}</pre>
+      {/* <pre>{JSON.stringify(auth, null, 4)}</pre> */}
       <div className='home-content'>
         <h1 style={{ fontSize: '50px' }}>JustForYou</h1>
         <p>– Where Superiority Meets {messages[currentFont]}</p>
@@ -52,9 +53,10 @@ const Home = () => {
         </div>
         <br />
 
-        <div>
-          <button className='buy-button'>BUY NOW</button>
-        </div>
+        <Link to="/all-products" style={{ textDecoration: 'none' }}>
+          <button className="buy-button">BUY NOW</button>
+        </Link>
+
 
       </div>
       <img src={bg} alt='' style={{ height: 'auto', width: '100%', marginTop: '40px' }} />

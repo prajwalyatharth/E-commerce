@@ -19,6 +19,9 @@ import CreateCategory from './components/admin/CreateCategory';
 import UsersPage from './components/admin/UsersPage';
 import Profile from './pages/user/Profile';
 import Orders from './pages/user/Orders';
+import Products from './components/admin/Products';
+import UpdateProduct from './components/admin/UpdateProduct';
+import AllProducts from './pages/allProducts/AllProducts';
 
 
 function App() {
@@ -36,15 +39,19 @@ function App() {
             <Route exact path='/dashboard/user/profile' element={<Profile />} />
             <Route exact path='/dashboard/user/orders' element={<Orders />} />
           </Route>
+
           <Route exact path='/dashboard' element={<AdminRoute />}>
             <Route exact path='admin' element={<AdminDashboard />} />
             <Route exact path='/dashboard/admin/create-product' element={<CreateProduct />} />
+            <Route exact path='/dashboard/admin/product/:slug' element={<UpdateProduct />} />
             <Route exact path='/dashboard/admin/create-category' element={<CreateCategory />} />
+            <Route exact path='/dashboard/admin/products' element={<Products />} />
             <Route exact path='/dashboard/admin/user' element={<UsersPage />} />
           </Route>
 
 
           <Route exact path='/register' element={<Register />} />
+          <Route exact path='/all-products' element={<AllProducts />} />
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/forgot-password' element={<Forgotpassword />} />
           <Route exact path='*' element={<PageNotFound />} />
