@@ -1,61 +1,227 @@
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../context/auth';
-import axios from 'axios';
-
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { Checkbox, Radio } from "antd";
+import { Prices } from "../../components/prices/Prices";
+import { Helmet } from "react-helmet";
+import { useCart } from "../../context/cart";
+import toast, { Toaster } from "react-hot-toast";
 
 const AllProducts = () => {
-    const [auth, setAuth] = useAuth();
-    const [products, setProducts] = useState([])
-    const [category, setCategory] = useState([])
+  const [cart, setCart] = useCart();
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [checked, setChecked] = useState([]);
+  const [radio, setRadio] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmNlZDAzOTI0N2Y4NTA1NmE3ZDIwMWIiLCJpYXQiOjE3MjUyOTYwMTUsImV4cCI6MTcyNzg4ODAxNX0.MGeT6VvFupJCo9bclxKh2wb9Ctl5WT_4CsQOJOTXj-Q';
-
-
-    //GET ALL PRODUCTS
-    const getAllProducts = async () => {
-        try {
-            const { data } = await axios.get(`http://localhost:8080/api/v1/products/get-product`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            setProducts()
-        } catch (error) {
-            console.log(error)
-        }
+  // Get all categories
+  const getAllCategory = async () => {
+    try {
+      const { data } = await axios.get(
+        `http://localhost:8080/api/v1/category/get-category`
+      );
+      if (data?.success) {
+        setCategories(data?.categories);
+      }
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-    useEffect(() => {
-        getAllProducts()
-    })
-    return (
-        <div className='dashboard-page container m-5'>
-            <div className='row'>
-                <div className="col-md-2">
-                    <h6 className='text-center'>Filter By Category</h6>
-                </div>
-                <div className="col-md-10">
-                    <h2 className='text-center'> Products </h2>
-                    <div className='d-flex flex-wrap justify-content-center '>
-                        {products?.map((p) => (
+  // Get all products
+  const getAllProducts = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get(
+        `http://localhost:8080/api/v1/products/product-list/${page}`
+      );
+      setLoading(false);
+      setProducts(data?.products || []);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
 
-                            <div className="card m-3" style={{ width: '15rem', height: '18rem' }} key={p._id}>
-                                <img src={`http://localhost:8080/api/v1/products/product-photo/${p._id}`} className="card-img-top" alt={p.name} />
-                                <div className="card-body">
-                                    <h5 className="card-title">{p.name}</h5>
-                                    <p className="card-text">{p.description}</p>
-                                    <button className="btn btn-primary">Update</button>
-                                </div>
-                            </div>
+  // Get total product count
+  const getTotal = async () => {
+    try {
+      const { data } = await axios.get(
+        `http://localhost:8080/api/v1/products/product-count`
+      );
+      setTotal(data?.total || 0);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-                        ))}
-                    </div>
-                </div>
+  useEffect(() => {
+    getAllCategory();
+    getTotal();
+    getAllProducts();
+  }, []);
 
+  useEffect(() => {
+    if (page > 1) {
+      loadmore();
+    }
+  }, [page]);
+
+  const loadmore = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get(
+        `http://localhost:8080/api/v1/products/product-list/${page}`
+      );
+      setLoading(false);
+      setProducts((prevProducts) => [
+        ...prevProducts,
+        ...(data?.products || []),
+      ]);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
+  const handleFilter = (value, id) => {
+    const all = value ? [...checked, id] : checked.filter((c) => c !== id);
+    setChecked(all);
+  };
+
+  const filterProduct = async () => {
+    try {
+      const { data } = await axios.post(
+        `http://localhost:8080/api/v1/products/product-filter`,
+        {
+          checked,
+          radio,
+        }
+      );
+      setProducts(data?.product || []);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (checked.length || radio.length) {
+      filterProduct();
+    } else {
+      getAllProducts();
+    }
+  }, [checked, radio]);
+
+  const resetFilters = () => {
+    setChecked([]);
+    setRadio([]);
+    setPage(1);
+    getAllProducts();
+  };
+
+  return (
+    <div className="dashboard-page container my-4">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Products</title>
+      </Helmet>
+      <Toaster />
+      <div className="row">
+        <div className="col-md-2">
+          <div className="sticky-top" style={{ top: "80px" }}>
+            <h6 className="text-center my-2">Filter By Category</h6>
+            <div className="card p-2">
+              {categories?.map((c) => (
+                <Checkbox
+                  key={c._id}
+                  onChange={(e) => handleFilter(e.target.checked, c._id)}
+                >
+                  {c.name}
+                </Checkbox>
+              ))}
             </div>
+            <h6 className="text-center my-2">Filter By Price</h6>
+            <div className="card p-2">
+              <Radio.Group onChange={(e) => setRadio(e.target.value)}>
+                {Prices?.map((p) => (
+                  <div key={p._id}>
+                    <Radio value={p.array}>{p.name}</Radio>
+                  </div>
+                ))}
+              </Radio.Group>
+            </div>
+            <div className="text-center my-2">
+              <button className="btn btn-danger" onClick={resetFilters}>
+                Reset Filter
+              </button>
+            </div>
+          </div>
         </div>
-    )
-}
 
-export default AllProducts
+        <div className="col-md-10">
+          <h2 className="text-center">Products</h2>
+          <div className="d-flex flex-wrap justify-content-center">
+            {products?.map((p) => (
+              <div
+                className="card m-3"
+                style={{ width: "15rem", height: "20rem" }}
+                key={p._id}
+              >
+                <img
+                  src={`http://localhost:8080/api/v1/products/product-photo/${p._id}`}
+                  className="card-img-top"
+                  alt={p.name}
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{p.name}</h5>
+                  <p className="card-text">
+                    {p.description.substring(0, 30)}...
+                  </p>
+                  <p className="card-text">Rs {p.price}</p>
+                  <div className=" d-flex justify-content-between">
+                    <Link
+                      key={p._id}
+                      to={`/products/${p.slug}`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <div
+                        to="/"
+                        className="d-flex justify-content-center align-content-center"
+                      >
+                        <div className="ms-1">More Details</div>
+                      </div>
+                    </Link>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => {
+                        setCart([...cart, p]);
+                        toast.success("Item is added to cart");
+                      }}
+                    >
+                      Add To Cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="m-2 p-3 text-center">
+            {products && products.length < total && (
+              <button
+                className="btn btn-warning"
+                onClick={() => setPage(page + 1)}
+              >
+                {loading ? "Loading..." : "Load More"}
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AllProducts;

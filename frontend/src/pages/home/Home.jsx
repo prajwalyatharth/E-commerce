@@ -61,6 +61,7 @@ const Home = () => {
       </div>
       <img src={bg} alt='' style={{ height: 'auto', width: '100%', marginTop: '40px' }} />
       <Homefeature />
+
     </div>
   );
 };
