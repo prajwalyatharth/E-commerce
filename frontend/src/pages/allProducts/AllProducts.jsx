@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { json, Link } from "react-router-dom";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../../components/prices/Prices";
 import { Helmet } from "react-helmet";
@@ -198,6 +198,10 @@ const AllProducts = () => {
                       className="btn btn-primary"
                       onClick={() => {
                         setCart([...cart, p]);
+                        localStorage.setItem(
+                          "cart",
+                          JSON.stringify([...cart, p])
+                        );
                         toast.success("Item is added to cart");
                       }}
                     >

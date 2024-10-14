@@ -11,7 +11,7 @@ const AdminDashboard = () => {
         <div className="col-md-2">
           <AdminMenu />
         </div>
-        <div className="col-md-10">
+        <div className="col-md-9">
           <h2 className="text-center">Admin Dashboard</h2>
 
           <div className="card w- p-3">

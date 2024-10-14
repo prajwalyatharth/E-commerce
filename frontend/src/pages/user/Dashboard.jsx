@@ -6,12 +6,12 @@ import UserMenu from "../../components/userMenu/UserMenu";
 const Dashboard = () => {
   const [auth] = useAuth();
   return (
-    <div className="dashboard-page container-fluid my-4">
+    <div className="dashboard-page container my-4">
       <div className="row">
         <div className="col-md-2">
           <UserMenu />
         </div>
-        <div className="col-md-10">
+        <div className="col-md-9">
           <h3>User Dashboard</h3>
 
           <div className="card w-75 p-3">

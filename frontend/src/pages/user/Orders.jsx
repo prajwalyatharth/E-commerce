@@ -3,7 +3,7 @@ import UserMenu from "../../components/userMenu/UserMenu";
 
 const Orders = () => {
   return (
-    <div className="dashboard-page container-fluid my-4">
+    <div className="dashboard-page container my-4">
       <div className="row">
         <div className="col-md-2">
           <UserMenu />

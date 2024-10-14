@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.20.5",
     "axios": "^1.7.3",
+    "braintree-web-drop-in-react": "^1.2.1",
     "concurrently": "^8.2.2",
     "cors": "^2.8.5",
     "helmet": "^7.1.0",
